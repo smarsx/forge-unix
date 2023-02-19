@@ -2,9 +2,9 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/console2.sol";
-import { Test } from "forge-std/Test.sol";
-import { Unix } from "../lib/unix/src/Unix.sol";
-import { Command } from "../lib/unix/src/Command.sol";
+import {Test} from "forge-std/Test.sol";
+import {Unix} from "../lib/unix/src/Unix.sol";
+import {Command} from "../lib/unix/src/Command.sol";
 
 contract UnixTest is Test {
     using Unix for *;
@@ -18,6 +18,10 @@ contract UnixTest is Test {
         console2.log(string.concat("\nEchoed: \"", string(data), "\""));
     }
 
+    /*
+    [FAIL. Reason: Failed to execute command: No such file or directory (os error 2)]
+    */
+
     function testStrong() public {
         Command echo = Unix.echo().n().stdout("Hello World");
         (uint256 success, bytes memory data) = Unix.run(echo);
@@ -30,15 +34,13 @@ contract UnixTest is Test {
     error[9574]: TypeError: Type contract Echo is not implicitly convertible to expected type contract Command.
     --> test/unix.t.sol:22:9:
     |
- 22 |         Command echo = Unix.echo().n().stdout("Hello World");
+    22 |         Command echo = Unix.echo().n().stdout("Hello World");
 
     error[9582]: TypeError: Member "run" not found or not visible after argument-dependent lookup in type(library Unix).
     --> test/unix.t.sol:23:48:
     |
- 23 |         (uint256 success, bytes memory data) = Unix.run(echo);
+    23 |         (uint256 success, bytes memory data) = Unix.run(echo);
     */
-
-
 
     function testTester() public {
         (uint256 success, bytes memory data) = Unix.run("hello world");
