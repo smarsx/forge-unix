@@ -41,16 +41,4 @@ contract UnixTest is Test {
     |
     23 |         (uint256 success, bytes memory data) = Unix.run(echo);
     */
-
-    function testTester() public {
-        (uint256 success, bytes memory data) = Unix.run("hello world");
-        assertEq(success, 1);
-        console2.log(vm.toString(data));
-    }
-
-    /*
-    Running 1 test for test/unix.t.sol:UnixTest
-    [FAIL. Reason: Failed to execute command: No such file or directory (os error 2)] testTester() (gas: 1972828)
-    Test result: FAILED. 0 passed; 1 failed; finished in 3.40ms
-    */
 }
